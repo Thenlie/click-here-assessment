@@ -63,7 +63,26 @@ test('connects to signup route', async () => {
 
 // connect to task GET route
 test('connects to task GET route', async () => {
-    const response = await fetch('http://localhost:3000/task/');
+    const email = faker.internet.exampleEmail();
+    const username = faker.internet.userName();
+    const password = faker.internet.password();
+    const user = await fetch('http://localhost:3000/signup/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "email": email,
+            "username": username,
+            "password": password
+        })
+    });
+    const data = await user.json();
+    const response = await fetch('http://localhost:3000/task/', {
+        headers: {
+            'Authorization': 'Bearer ' + data.token
+        }
+    });
     expect(response.ok).toBe(true);
     expect(response.status).toBe(200);
 });

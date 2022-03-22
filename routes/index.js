@@ -52,10 +52,6 @@ router.get('/task', async (req, res) => {
         const response = await Task.findOne({
             where: { user_id: userData.id } 
         });
-        if (!response) {
-            res.status(400).json({ message: 'invalid task!' });
-            return;
-        }
         res.status(200).json({ task: response });
     } catch (err) {
         res.status(500).json(err);

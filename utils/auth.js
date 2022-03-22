@@ -11,6 +11,7 @@ module.exports = {
         if (!token) {
             return false;
         };
+        // separate "Bearer" from "<tokenvalue>"
         token = token.split(' ').pop().trim();
         if (!token) {
             return false;
