@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Task } = require('../models');
 const { signToken } = require('../utils/auth');
 
 // create express router variable
@@ -37,9 +37,44 @@ router.post('/login', async (req, res) => {
         const token = signToken(response);
         res.status(200).json({ user: response, token: token });
     } catch (err) {
-        console.log(err)
         res.status(500).json(err);
     }
 });
+
+// router.get('/task', async (req, res) => {
+//     try {
+
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
+
+router.post('/task', async (req, res) => {
+    try {
+        const response = await Task.create({
+            name: "",
+            description: "",
+            user_id: "",
+        })
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// router.put('/task', async (req, res) => {
+//     try {
+
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
+
+// router.delete('/task', async (req, res) => {
+//     try {
+
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
 
 module.exports =  router;
