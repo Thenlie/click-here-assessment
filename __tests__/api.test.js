@@ -1,5 +1,6 @@
-const fetch = require('node-fetch').default;
+const fetch = require('node-fetch');
 const { faker } = require('@faker-js/faker');
+const { getFakeData } = require('../utils/faker');
 
 // connect to express server at root endpoint
 test('connects to express server', async () => {
@@ -10,20 +11,7 @@ test('connects to express server', async () => {
 
 // connect to login route
 test('connects to login route', async () => {
-    const email = faker.internet.exampleEmail();
-    const username = faker.internet.userName();
-    const password = faker.internet.password();
-    await fetch('http://localhost:3000/signup/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "email": email,
-            "username": username,
-            "password": password
-        })
-    });
+    const { email, password } = await getFakeData();
     const response = await fetch('http://localhost:3000/login/', {
         method: 'POST',
         headers: {
@@ -63,24 +51,10 @@ test('connects to signup route', async () => {
 
 // connect to task GET route
 test('connects to task GET route', async () => {
-    const email = faker.internet.exampleEmail();
-    const username = faker.internet.userName();
-    const password = faker.internet.password();
-    const user = await fetch('http://localhost:3000/signup/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "email": email,
-            "username": username,
-            "password": password
-        })
-    });
-    const data = await user.json();
+    const { token } = await getFakeData();
     const response = await fetch('http://localhost:3000/task/', {
         headers: {
-            'Authorization': 'Bearer ' + data.token
+            'Authorization': 'Bearer ' + token
         }
     });
     expect(response.ok).toBe(true);

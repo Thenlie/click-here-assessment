@@ -3,10 +3,12 @@ const secret = process.env.JWT_SECRET;
 const expiration = '1h';
 
 module.exports = {
+    // generate JWT on login or signup
     signToken: function({ email, username, id }) {
         const payload = { email, username, id };
         return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
     },
+    // verify token is valid on task routes
     verifyToken: function(token) {
         if (!token) {
             return false;
