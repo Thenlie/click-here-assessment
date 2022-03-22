@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const { signToken } = require('../utils/auth');
 
 // create express router variable
 const router = require('express').Router();
@@ -11,7 +12,8 @@ router.post('/signup', async (req, res) => {
             username: req.body.username,
             password: req.body.password,
         });
-        res.status(200).json({ user: response});
+        const token = signToken(response);
+        res.status(200).json({ user: response, token: token });
     } catch (err) {
         res.status(500).json(err);
     }
@@ -32,8 +34,10 @@ router.post('/login', async (req, res) => {
             res.status(401).json({ message: 'invalid password!' });
             return;
         }
-        res.status(200).json({ message: 'logged in!'});
+        const token = signToken(response);
+        res.status(200).json({ user: response, token: token });
     } catch (err) {
+        console.log(err)
         res.status(500).json(err);
     }
 });
