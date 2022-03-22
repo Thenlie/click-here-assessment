@@ -28,7 +28,6 @@ router.post('/login', async (req, res) => {
             return;
         }
         const isValid = await response.checkPassword(req.body.password);
-        // console.log(isValid)
         if (!isValid) {
             res.status(401).json({ message: 'invalid password!' });
             return;

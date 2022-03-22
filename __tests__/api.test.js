@@ -10,15 +10,29 @@ test('connects to express server', async () => {
 
 // connect to login route
 test('connects to login route', async () => {
+    const email = faker.internet.exampleEmail();
+    const username = faker.internet.userName();
+    const password = faker.internet.password();
+    await fetch('http://localhost:3000/signup/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "email": email,
+            "username": username,
+            "password": password
+        })
+    });
     const response = await fetch('http://localhost:3000/login/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        // body: JSON.stringify({
-        //     "email": faker.internet.exampleEmail(),
-        //     "password": faker.internet.password()
-        // })
+        body: JSON.stringify({
+            "email": email,
+            "password": password,
+        })
     });
     expect(response.ok).toBe(true);
     expect(response.status).toBe(200);
