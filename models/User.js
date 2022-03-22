@@ -4,8 +4,8 @@ const bcrypt = require('bcrypt');
 
 class User  extends Model {
     // function to check for a valid password on login
-    checkPassword(input_pw) {
-        return bcrypt.compare(input_pw, this.password);
+    async checkPassword(input) {
+        return bcrypt.compare(input, this.password)
     };
 };
 
