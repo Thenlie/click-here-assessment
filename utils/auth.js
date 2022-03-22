@@ -8,6 +8,9 @@ module.exports = {
         return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
     },
     verifyToken: function(token) {
+        if (!token) {
+            return false;
+        };
         token = token.split(' ').pop().trim();
         if (!token) {
             return false;
