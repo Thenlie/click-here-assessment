@@ -34,8 +34,11 @@ test('connects to login route', async () => {
             "password": password,
         })
     });
+    const data = await response.json()
     expect(response.ok).toBe(true);
     expect(response.status).toBe(200);
+    expect(data.user);
+    expect(data.token);
 });
 
 // connect to signup route
@@ -51,8 +54,11 @@ test('connects to signup route', async () => {
             "password": faker.internet.password()
         })
     });
+    const data = await response.json()
     expect(response.ok).toBe(true);
     expect(response.status).toBe(200);
+    expect(data.user);
+    expect(data.token);
 });
 
 // connect to task GET route
