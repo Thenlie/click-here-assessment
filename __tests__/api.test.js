@@ -1,4 +1,5 @@
 const fetch = require('node-fetch').default;
+const { faker } = require('@faker-js/faker');
 
 // connect to express server at root endpoint
 test('connects to express server', async () => {
@@ -19,7 +20,15 @@ test('connects to login route', async () => {
 // connect to signup route
 test('connects to signup route', async () => {
     const response = await fetch('http://localhost:3000/signup/', {
-        method: 'POST'
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "email": faker.internet.exampleEmail(),
+            "username": faker.internet.userName(),
+            "password": faker.internet.password()
+        })
     });
     expect(response.ok).toBe(true);
     expect(response.status).toBe(200);
