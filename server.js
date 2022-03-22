@@ -9,13 +9,14 @@ const PORT = process.env.PORT || 3000;
 
 // set up express server middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 // sample GET route to ensure server works
 app.get('/', (req, res) => {
     res.send('The Server Works!');
 });
 
+app.use(require('./routes'));
 
 // start running the app on the port defined at the top of the file
 sequelize.sync({ force: false }).then(() => {

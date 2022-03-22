@@ -9,14 +9,18 @@ test('connects to express server', async () => {
 
 // connect to login route
 test('connects to login route', async () => {
-    const response = await fetch('http://localhost:3000/login/');
+    const response = await fetch('http://localhost:3000/login/', {
+        method: 'POST'
+    });
     expect(response.ok).toBe(true);
     expect(response.status).toBe(200);
 });
 
 // connect to signup route
 test('connects to signup route', async () => {
-    const response = await fetch('http://localhost:3000/signup/');
+    const response = await fetch('http://localhost:3000/signup/', {
+        method: 'POST'
+    });
     expect(response.ok).toBe(true);
     expect(response.status).toBe(200);
 });
