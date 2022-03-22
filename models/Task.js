@@ -38,4 +38,6 @@ Task.init(
         underscored: true,
         modelName: 'task'
     }
-)
+);
+
+module.exports = Task;
