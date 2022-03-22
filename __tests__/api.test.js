@@ -11,7 +11,14 @@ test('connects to express server', async () => {
 // connect to login route
 test('connects to login route', async () => {
     const response = await fetch('http://localhost:3000/login/', {
-        method: 'POST'
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        // body: JSON.stringify({
+        //     "email": faker.internet.exampleEmail(),
+        //     "password": faker.internet.password()
+        // })
     });
     expect(response.ok).toBe(true);
     expect(response.status).toBe(200);
