@@ -1,5 +1,5 @@
 const { User, Task } = require('../models');
-const { signToken } = require('../utils/auth');
+const { signToken, verifyToken } = require('../utils/auth');
 
 // create express router variable
 const router = require('express').Router();
@@ -50,15 +50,26 @@ router.post('/login', async (req, res) => {
 // });
 
 router.post('/task', async (req, res) => {
+    const auth = req.get('Authorization');
+    const userData = verifyToken(auth);
+    if (!userData) {
+        res.status(401).json({ message: 'must be logged in' });
+        return;
+    }
     try {
         const response = await Task.create({
-            name: "",
-            description: "",
-            user_id: "",
-        })
+            name: req.body.name,
+            description: req.body.description,
+            user_id: userData.id
+        });
+        if (!response) {
+            res.status(400).json({ message: 'invalid task!' });
+            return;
+        }
     } catch (err) {
         res.status(500).json(err);
     }
+    res.status(200).json({ message: 'task created!' });
 });
 
 // router.put('/task', async (req, res) => {

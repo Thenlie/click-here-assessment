@@ -7,4 +7,20 @@ module.exports = {
         const payload = { email, username, id };
         return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
     },
+    verifyToken: function(token) {
+        token = token.split(' ').pop().trim();
+        if (!token) {
+            return false;
+        };
+        try {
+            const { data } = jwt.verify(token, secret, { maxAge: expiration });
+            if (!data) {
+                return false;
+            };
+            return data;
+        } catch {
+            console.log('invalid token');
+            return false;
+        };
+    }
 };
