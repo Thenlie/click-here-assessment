@@ -9,7 +9,8 @@ User.init(
             type: DataTypes.STRING,
             allowNull: false,
             primaryKey: true,
-            autoIncrement: true
+            // autoIncrement: true
+            serial: true
         },
         username: {
             type: DataTypes.STRING,
@@ -36,4 +37,4 @@ User.init(
     }
 );
 
-module.export = User
+module.exports = User;
