@@ -15,6 +15,7 @@ This is a back-end only app so it must be tested in API testing software like [P
 ![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)
 ![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white)
+![Insomnia](https://img.shields.io/badge/Insomnia-black?style=for-the-badge&logo=insomnia&logoColor=5849BE)
 
 </div>
 
@@ -31,9 +32,18 @@ To use this app first clone the repository to your local machine. To do this, na
 
 Next you will need to install the projects npm dependencies. Since all of the required packages are already listed as dependencies in the package.json file this is an easy task. From the root directory of the project simply run the command `npm install` or `npm i`. 
 
-Once dependencies have been installed you are ready to run the app! This can be done with the command `npm start` from the root directory of the project. If you would prefer to have the server update every time you make a change you can run the command `npm run watch` instead. You will see a console log stating '*API server running on port 3000!*'. This is the address for the backend express server. 
+The last thing you need to do before spinning up the server is to create a `.env` file. This will contain your Postgres login credentials and the JWT secret. The variable needed are as follows:
+
+- DB_NAME
+- DB_USER
+- DB_PW
+- JWT_SECRET
+
+Once dependencies have been installed you are ready to run the app! This can be done with the command `npm start` from the root directory of the project. If you would prefer to have the server update every time you make a change you can run the command `npm run watch` instead. You will see a console log stating '*App listening on port 3000!*'. This is the address for the backend express server. 
 
 The server is now live and the API can be tested. This should be done with your favorite API testing software, like Insomnia Core. To make this process easier, I have exported my Insomnia request collection. You can follow the documentation [here](https://docs.insomnia.rest/insomnia/import-export-data) to import this collection to your own instance of Insomnia. The file can be found in the [assets](https://github.com/Thenlie/click-here-assessment/tree/main/assets) directory of this repo. 
+
+    NOTE: When testing any route that requires a user to be logged in, you will need to paste a valid JWT in the Authorization headers of request. 
 
 ## Testing
 
