@@ -106,18 +106,28 @@ router.put('/task', async (req, res) => {
     res.status(200).json({ message: 'task updated!' });
 });
 
-// router.delete('/task', async (req, res) => {
-    // const auth = req.get('Authorization');
-    // const userData = verifyToken(auth);
-    // if (!userData) {
-    //     res.status(401).json({ message: 'must be logged in' });
-    //     return;
-    // };
-//     try {
-
-//     } catch (err) {
-//         res.status(500).json(err);
-//     };
-// });
+router.delete('/task', async (req, res) => {
+    const auth = req.get('Authorization');
+    const userData = verifyToken(auth);
+    if (!userData) {
+        res.status(401).json({ message: 'must be logged in' });
+        return;
+    };
+    try {
+        const response = await Task.destroy({
+            where: {
+                user_id: userData.id,
+                id: req.body.id
+            }
+        });
+        if (!response) {
+            res.status(400).json({ message: 'invalid task!' });
+            return;
+        };
+    } catch (err) {
+        res.status(500).json(err); 
+    };
+    res.status(200).json({ message: 'task deleted!' });
+});
 
 module.exports =  router;
