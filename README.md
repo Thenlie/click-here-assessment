@@ -43,7 +43,7 @@ Once dependencies have been installed you are ready to run the app! This can be 
 
 The server is now live and the API can be tested. This should be done with your favorite API testing software, like Insomnia Core. To make this process easier, I have exported my Insomnia request collection. You can follow the documentation [here](https://docs.insomnia.rest/insomnia/import-export-data) to import this collection to your own instance of Insomnia. The file can be found in the [assets](https://github.com/Thenlie/click-here-assessment/tree/main/assets) directory of this repo. 
 
-    NOTE: When testing any route that requires a user to be logged in, you will need to paste a valid JWT in the Authorization headers of request. 
+> NOTE: When testing any route that requires a user to be logged in, you will need to paste a valid JWT in the Authorization headers of request. 
 
 ## Testing
 
