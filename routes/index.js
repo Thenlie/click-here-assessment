@@ -41,8 +41,8 @@ router.post('/login', async (req, res) => {
     };
 });
 
-// get a logged in users tasks
-router.get('/task', async (req, res) => {
+// get all logged in users tasks
+router.get('/tasks', async (req, res) => {
     const auth = req.get('Authorization');
     const userData = verifyToken(auth);
     if (!userData) {
@@ -52,6 +52,27 @@ router.get('/task', async (req, res) => {
     try {
         const response = await Task.findAll({
             where: { user_id: userData.id } 
+        });
+        res.status(200).json({ task: response });
+    } catch (err) {
+        res.status(500).json(err);
+    };
+});
+
+// get one logged in users task
+router.get('/task', async (req, res) => {
+    const auth = req.get('Authorization');
+    const userData = verifyToken(auth);
+    if (!userData) {
+        res.status(401).json({ message: 'must be logged in' });
+        return;
+    };
+    try {
+        const response = await Task.findAll({
+            where: { 
+                user_id: userData.id,
+                id: req.body.id  
+            } 
         });
         res.status(200).json({ task: response });
     } catch (err) {
@@ -98,11 +119,11 @@ router.put('/task', async (req, res) => {
                 id: req.body.id
             }
         });
-        if (!response) {
+        if (!response || response[0] === 0) {
             res.status(400).json({ message: 'invalid task!' });
             return;
         };
-        res.status(200).json({ response: response, message: 'task updated!' });
+        res.status(200).json({ message: 'task updated!' });
     } catch (err) {
         console.log(err)
         res.status(500).json(err);
@@ -131,6 +152,27 @@ router.delete('/task', async (req, res) => {
         res.status(200).json({ message: 'task deleted!' });
     } catch (err) {
         res.status(500).json(err); 
+    };
+});
+
+
+// get all users
+router.get('/users', async (req, res) => {
+    try {
+        const response = await User.findAll();
+        res.status(200).json(response);
+    } catch (err) {
+        res.status(500).json(err);
+    };
+});
+
+// get all tasks
+router.get('/all-tasks', async (req, res) => {
+    try {
+        const response = await Task.findAll();
+        res.status(200).json(response);
+    } catch (err) {
+        res.status(500).json(err);
     };
 });
 

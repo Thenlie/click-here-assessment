@@ -52,13 +52,15 @@ test('connects to signup route', async () => {
 // connect to task GET route
 test('connects to task GET route', async () => {
     const { token } = await getFakeData();
-    const response = await fetch('http://localhost:3000/task/', {
+    const response = await fetch('http://localhost:3000/tasks/', {
         headers: {
             'Authorization': 'Bearer ' + token
         }
     });
+    const data = await response.json()
     expect(response.ok).toBe(true);
     expect(response.status).toBe(200);
+    expect(data.task);
 });
 
 // connect to task POST route
