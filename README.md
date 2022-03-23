@@ -1,6 +1,6 @@
-# Click Here Digital Technical Assessment ![Project License Badge](https://img.shields.io/badge/license-MIT-brightgreen)
+# Click Here Digital Technical Assessment ![Project License Badge](https://img.shields.io/badge/license-MIT-brightgreen) ![Project Test Badge](https://img.shields.io/badge/tests-100%-blue)
 
-A technical interview assessment created for [Click Here Digital](https://www.clickheredigital.com/). I created a fully functional RESTful API from scratch using a [PostgreSQL](https://www.postgresql.org/) database, [Sequelize](https://sequelize.org/) as the ORM and [Express](https://expressjs.com/) for the server. All routes have unit tests created with [Jest](https://jestjs.io/). User authentication is handled via JSON Web Token. 
+A technical interview assessment created for [Click Here Digital](https://www.clickheredigital.com/). I created a fully functional RESTful API from scratch using a [PostgreSQL](https://www.postgresql.org/) database, [Sequelize](https://sequelize.org/) as the ORM and [Express](https://expressjs.com/) for the server. All routes have unit tests created with [Jest](https://jestjs.io/). User authentication is handled via [JSON Web Token](https://jwt.io/). 
 
 This is a back-end only app so it must be tested in API testing software like [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/). For full instructions on running the app see [Usage](#usage).
 
@@ -33,7 +33,7 @@ Next you will need to install the projects npm dependencies. Since all of the re
 
 Once dependencies have been installed you are ready to run the app! This can be done with the command `npm start` from the root directory of the project. If you would prefer to have the server update every time you make a change you can run the command `npm run watch` instead. You will see a console log stating '*API server running on port 3000!*'. This is the address for the backend express server. 
 
-The server is now live and the API can be tested. This should be done with your favorite API testing software, mine is Insomnia Core. 
+The server is now live and the API can be tested. This should be done with your favorite API testing software, like Insomnia Core. To make this process easier, I have exported my Insomnia request collection. You can follow the documentation [here](https://docs.insomnia.rest/insomnia/import-export-data) to import this collection to your own instance of Insomnia. The file can be found in the [assets](https://github.com/Thenlie/click-here-assessment/tree/main/assets) directory of this repo. 
 
 ## Testing
 
