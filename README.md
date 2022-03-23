@@ -2,7 +2,7 @@
 
 A technical interview assessment created for [Click Here Digital](https://www.clickheredigital.com/). 
 
-I created a fully functional RESTful API from scratch using a [PostgreSQL](https://www.postgresql.org/) database, [Sequelize](https://sequelize.org/) as the ORM and [Express](https://expressjs.com/) for the server. All routes have unit tests created with [Jest](https://jestjs.io/). User authentication is handled via [JSON Web Token](https://jwt.io/). 
+I created a fully functional RESTful API from scratch using a [PostgreSQL](https://www.postgresql.org/) database, [Sequelize](https://sequelize.org/) ORM, and [Express](https://expressjs.com/) server. All routes have unit tests created with [Jest](https://jestjs.io/). User authentication is handled via [JSON Web Token](https://jwt.io/). 
 
 This is a back-end only app so it must be tested in API testing software like [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/). For full instructions on running the app see [Usage](#usage).
 
@@ -34,7 +34,7 @@ To use this app first clone the repository to your local machine. To do this, na
 
 Next you will need to install the projects npm dependencies. Since all of the required packages are already listed as dependencies in the package.json file this is an easy task. From the root directory of the project simply run the command `npm install` or `npm i`. 
 
-The last thing you need to do before spinning up the server is to create a `.env` file. This will contain your Postgres login credentials and the JWT secret. The variable needed are as follows:
+The last thing you need to do before spinning up the server is create a `.env` file. This will contain your Postgres login credentials and the JWT secret. The variables needed are as follows:
 
 - DB_NAME
 - DB_USER
