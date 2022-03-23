@@ -13,7 +13,7 @@ module.exports = {
         if (!token) {
             return false;
         };
-        // separate "Bearer" from "<tokenvalue>"
+        // separate "Bearer" from rest of token
         token = token.split(' ').pop().trim();
         if (!token) {
             return false;

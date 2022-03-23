@@ -38,6 +38,7 @@ module.exports = {
             })
         });
         const userData = await user.json();
+        // create a new Task with fake data
         const task = await fetch('http://localhost:3000/task/', {
             method: 'POST',
             headers: {

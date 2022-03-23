@@ -13,7 +13,7 @@ router.post('/signup', async (req, res) => {
             password: req.body.password
         });
         const token = signToken(response);
-        res.status(200).json({ user: response, token: token });
+        res.status(201).json({ user: response, token: token });
     } catch (err) {
         res.status(500).json(err);
     };
@@ -59,6 +59,7 @@ router.get('/task', async (req, res) => {
     };
 });
 
+// create a new task
 router.post('/task', async (req, res) => {
     const auth = req.get('Authorization');
     const userData = verifyToken(auth);
@@ -82,6 +83,7 @@ router.post('/task', async (req, res) => {
     };
 });
 
+// update a logged in users task by ID
 router.put('/task', async (req, res) => {
     const auth = req.get('Authorization');
     const userData = verifyToken(auth);
@@ -89,7 +91,6 @@ router.put('/task', async (req, res) => {
         res.status(401).json({ message: 'must be logged in' });
         return;
     };
-    console.log(req.body)
     try {
         const response = await Task.update(req.body, {
             where: { 
@@ -101,13 +102,14 @@ router.put('/task', async (req, res) => {
             res.status(400).json({ message: 'invalid task!' });
             return;
         };
-        res.status(200).json({ message: 'task updated!' });
+        res.status(200).json({ response: response, message: 'task updated!' });
     } catch (err) {
         console.log(err)
         res.status(500).json(err);
     };
 });
 
+// delete a logged in users task by ID
 router.delete('/task', async (req, res) => {
     const auth = req.get('Authorization');
     const userData = verifyToken(auth);

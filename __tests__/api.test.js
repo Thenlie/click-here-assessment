@@ -44,7 +44,7 @@ test('connects to signup route', async () => {
     });
     const data = await response.json()
     expect(response.ok).toBe(true);
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(201);
     expect(data.user);
     expect(data.token);
 });
@@ -76,8 +76,10 @@ test('connects to task POST route', async () => {
             "user_id": id
         })
     });
+    const data = await response.json();
     expect(response.ok).toBe(true);
     expect(response.status).toBe(200);
+    expect(data.task.name).toBe('test task');
 });
 
 // connect to task PUT route
@@ -94,8 +96,10 @@ test('connects to task PUT route', async () => {
             "id": taskId
         })
     });
+    const data = await response.json();
     expect(response.ok).toBe(true);
     expect(response.status).toBe(200);
+    expect(data.message).toBe('task updated!')
 });
 
 // connect to task DELETE route
@@ -111,6 +115,8 @@ test('connects to task DELETE route', async () => {
             "id": taskId
         })
     });
+    const data = await response.json();
     expect(response.ok).toBe(true);
     expect(response.status).toBe(200);
+    expect(data.message).toBe('task deleted!')
 });

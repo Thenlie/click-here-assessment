@@ -21,4 +21,4 @@ app.use(require('./routes'));
 // start running the app on the port defined at the top of the file
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => { console.log(`App listening on port ${PORT}`) });
-})
+});
