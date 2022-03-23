@@ -10,13 +10,13 @@ router.post('/signup', async (req, res) => {
         const response = await User.create({
             email: req.body.email,
             username: req.body.username,
-            password: req.body.password,
+            password: req.body.password
         });
         const token = signToken(response);
         res.status(200).json({ user: response, token: token });
     } catch (err) {
         res.status(500).json(err);
-    }
+    };
 });
 
 // login existing user
@@ -28,17 +28,17 @@ router.post('/login', async (req, res) => {
         if (!response) {
             res.status(401).json({ message: 'invalid email!' });
             return;
-        }
+        };
         const isValid = await response.checkPassword(req.body.password);
         if (!isValid) {
             res.status(401).json({ message: 'invalid password!' });
             return;
-        }
+        };
         const token = signToken(response);
         res.status(200).json({ user: response, token: token });
     } catch (err) {
         res.status(500).json(err);
-    }
+    };
 });
 
 router.get('/task', async (req, res) => {
@@ -47,7 +47,7 @@ router.get('/task', async (req, res) => {
     if (!userData) {
         res.status(401).json({ message: 'must be logged in' });
         return;
-    }
+    };
     try {
         const response = await Task.findOne({
             where: { user_id: userData.id } 
@@ -74,27 +74,50 @@ router.post('/task', async (req, res) => {
         if (!response) {
             res.status(400).json({ message: 'invalid task!' });
             return;
-        }
+        };
     } catch (err) {
         res.status(500).json(err);
     };
     res.status(200).json({ message: 'task created!' });
 });
 
-// router.put('/task', async (req, res) => {
-//     try {
-
-//     } catch (err) {
-//         res.status(500).json(err);
-//     }
-// });
+router.put('/task', async (req, res) => {
+    const auth = req.get('Authorization');
+    const userData = verifyToken(auth);
+    if (!userData) {
+        res.status(401).json({ message: 'must be logged in' });
+        return;
+    };
+    try {
+        const response = await Task.update(req.body, {
+            where: { 
+                user_id: userData.id,
+                id: req.body.id
+            }
+        });
+        if (!response) {
+            res.status(400).json({ message: 'invalid task!' });
+            return;
+        };
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err);
+    };
+    res.status(200).json({ message: 'task updated!' });
+});
 
 // router.delete('/task', async (req, res) => {
+    // const auth = req.get('Authorization');
+    // const userData = verifyToken(auth);
+    // if (!userData) {
+    //     res.status(401).json({ message: 'must be logged in' });
+    //     return;
+    // };
 //     try {
 
 //     } catch (err) {
 //         res.status(500).json(err);
-//     }
+//     };
 // });
 
 module.exports =  router;
