@@ -41,6 +41,7 @@ router.post('/login', async (req, res) => {
     };
 });
 
+// get a logged in users tasks
 router.get('/task', async (req, res) => {
     const auth = req.get('Authorization');
     const userData = verifyToken(auth);
@@ -49,7 +50,7 @@ router.get('/task', async (req, res) => {
         return;
     };
     try {
-        const response = await Task.findOne({
+        const response = await Task.findAll({
             where: { user_id: userData.id } 
         });
         res.status(200).json({ task: response });
@@ -75,10 +76,10 @@ router.post('/task', async (req, res) => {
             res.status(400).json({ message: 'invalid task!' });
             return;
         };
+        res.status(200).json({ task: response });
     } catch (err) {
         res.status(500).json(err);
     };
-    res.status(200).json({ message: 'task created!' });
 });
 
 router.put('/task', async (req, res) => {
@@ -88,6 +89,7 @@ router.put('/task', async (req, res) => {
         res.status(401).json({ message: 'must be logged in' });
         return;
     };
+    console.log(req.body)
     try {
         const response = await Task.update(req.body, {
             where: { 
@@ -99,11 +101,11 @@ router.put('/task', async (req, res) => {
             res.status(400).json({ message: 'invalid task!' });
             return;
         };
+        res.status(200).json({ message: 'task updated!' });
     } catch (err) {
         console.log(err)
         res.status(500).json(err);
     };
-    res.status(200).json({ message: 'task updated!' });
 });
 
 router.delete('/task', async (req, res) => {
@@ -124,10 +126,10 @@ router.delete('/task', async (req, res) => {
             res.status(400).json({ message: 'invalid task!' });
             return;
         };
+        res.status(200).json({ message: 'task deleted!' });
     } catch (err) {
         res.status(500).json(err); 
     };
-    res.status(200).json({ message: 'task deleted!' });
 });
 
 module.exports =  router;

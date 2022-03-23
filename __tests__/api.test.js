@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 const { faker } = require('@faker-js/faker');
-const { getFakeData } = require('../utils/faker');
+const { getFakeData, getFakeTaskData } = require('../utils/faker');
 
 // connect to express server at root endpoint
 test('connects to express server', async () => {
@@ -63,8 +63,18 @@ test('connects to task GET route', async () => {
 
 // connect to task POST route
 test('connects to task POST route', async () => {
+    const { id, token } = await getFakeTaskData();
     const response = await fetch('http://localhost:3000/task/', {
-        method: 'POST'
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            "name": "test task",
+            "description": "test description",
+            "user_id": id
+        })
     });
     expect(response.ok).toBe(true);
     expect(response.status).toBe(200);
@@ -72,8 +82,17 @@ test('connects to task POST route', async () => {
 
 // connect to task PUT route
 test('connects to task PUT route', async () => {
+    const { token, taskId } = await getFakeTaskData();
     const response = await fetch('http://localhost:3000/task/', {
-        method: 'PUT'
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            "name": "updated text",
+            "id": taskId
+        })
     });
     expect(response.ok).toBe(true);
     expect(response.status).toBe(200);
@@ -81,8 +100,16 @@ test('connects to task PUT route', async () => {
 
 // connect to task DELETE route
 test('connects to task DELETE route', async () => {
+    const { token, taskId } = await getFakeTaskData();
     const response = await fetch('http://localhost:3000/task/', {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            "id": taskId
+        })
     });
     expect(response.ok).toBe(true);
     expect(response.status).toBe(200);
