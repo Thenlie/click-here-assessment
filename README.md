@@ -1,4 +1,4 @@
-# Click Here Digital Technical Assessment ![Project License Badge](https://img.shields.io/badge/license-MIT-brightgreen) ![Project Test Badge](https://img.shields.io/badge/tests-100%-blue)
+# Click Here Digital Technical Assessment ![Project License Badge](https://img.shields.io/badge/license-MIT-brightgreen) ![Project Test Badge](https://img.shields.io/badge/tests-100%25-blue)
 
 A technical interview assessment created for [Click Here Digital](https://www.clickheredigital.com/). I created a fully functional RESTful API from scratch using a [PostgreSQL](https://www.postgresql.org/) database, [Sequelize](https://sequelize.org/) as the ORM and [Express](https://expressjs.com/) for the server. All routes have unit tests created with [Jest](https://jestjs.io/). User authentication is handled via [JSON Web Token](https://jwt.io/). 
 
